@@ -26,6 +26,10 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.sort-hint {
+    text-align: center;
+    color: #060fbc;
+}
 
 .movie-title {
     text-align: center;

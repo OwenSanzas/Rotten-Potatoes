@@ -4,6 +4,8 @@
   <%= link_to 'Add New Movie', new_movie_path, class: 'btn btn-primary' %>
 </div>
 
+<p class="sort-hint">How to sort: Just click an attribute name to sort</p>
+
 <% current_sort = params[:sort] || session[:sort] %>
 <% current_direction = params[:direction] || session[:direction] || 'asc' %>
 

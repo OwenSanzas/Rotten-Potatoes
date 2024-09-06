@@ -1,16 +1,32 @@
-<p style="color: green"><%= notice %></p>
+<h1>All Movies</h1>
 
-<% content_for :title, "Movies" %>
+<% current_sort = params[:sort] || session[:sort] %>
+<% current_direction = params[:direction] || session[:direction] || 'asc' %>
 
-<h1>Movies</h1>
-
-<div id="movies">
+<table>
+  <thead>
+  <tr>
+    <th class="<%= 'sorted-asc' if current_sort == 'title' && current_direction == 'asc' %><%= ' sorted-desc' if current_sort == 'title' && current_direction == 'desc' %>">
+      <%= link_to 'Title', movies_path(sort: 'title', direction: current_sort == 'title' && current_direction == 'asc' ? 'desc' : 'asc') %>
+      <%= current_sort == 'title' ? (current_direction == 'asc' ? '▲' : '▼') : '' %>
+    </th>
+    <th class="<%= 'sorted-asc' if current_sort == 'rating' && current_direction == 'asc' %><%= ' sorted-desc' if current_sort == 'rating' && current_direction == 'desc' %>">
+      <%= link_to 'Rating', movies_path(sort: 'rating', direction: current_sort == 'rating' && current_direction == 'asc' ? 'desc' : 'asc') %>
+      <%= current_sort == 'rating' ? (current_direction == 'asc' ? '▲' : '▼') : '' %>
+    </th>
+    <th class="<%= 'sorted-asc' if current_sort == 'release_date' && current_direction == 'asc' %><%= ' sorted-desc' if current_sort == 'release_date' && current_direction == 'desc' %>">
+      <%= link_to 'Release Date', movies_path(sort: 'release_date', direction: current_sort == 'release_date' && current_direction == 'asc' ? 'desc' : 'asc') %>
+      <%= current_sort == 'release_date' ? (current_direction == 'asc' ? '▲' : '▼') : '' %>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
   <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
+    <tr>
+      <td><%= movie.title %></td>
+      <td><%= movie.rating %></td>
+      <td><%= movie.release_date %></td>
+    </tr>
   <% end %>
-</div>
-
-<%= link_to "New movie", new_movie_path %>
+  </tbody>
+</table>

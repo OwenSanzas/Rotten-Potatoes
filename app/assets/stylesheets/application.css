@@ -10,6 +10,20 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
- */
+/* app/assets/stylesheets/application.css */
+
+th {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+
+th.sorted-asc {
+    background-color: #e2e6f2;
+    color: blue;
+}
+
+th.sorted-desc {
+    background-color: #f2e2e6;
+    color: red;
+}

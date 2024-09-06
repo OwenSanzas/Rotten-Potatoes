@@ -12,26 +12,26 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :title, 'Title', style: "display: block; margin-top: 10px;" %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.label :rating, style: "display: block" %>
-    <%= form.text_field :rating %>
+    <%= form.label :rating, 'Rating', style: "display: block; margin-top: 10px;" %>
+    <%= form.select :rating, ['G', 'PG', 'PG-13', 'R', 'NC-17'], {}, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.label :description, 'Description', style: "display: block; margin-top: 10px;" %>
+    <%= form.text_area :description, rows: 4, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.label :release_date, style: "display: block" %>
-    <%= form.text_field :release_date %>
+    <%= form.label :release_date, 'Release Date', style: "display: block; margin-top: 10px;" %>
+    <%= form.date_field :release_date, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div style="margin-top: 15px;">
+    <%= form.submit 'Save Changes', class: 'btn btn-primary' %>
   </div>
 <% end %>

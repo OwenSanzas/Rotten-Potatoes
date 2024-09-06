@@ -1,26 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<p class="notice"><%= notice %></p>
 
-<h1><%= @movie.title %></h1>
+<div class="movie-details">
+  <h1 class="movie-title"><%= @movie.title %></h1>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @movie.rating %>
-</p>
+  <p class="movie-info">
+    <strong>Rating:</strong>
+    <%= @movie.rating %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @movie.description %>
-</p>
+  <p class="movie-info">
+    <strong>Description:</strong>
+    <%= @movie.description.present? ? @movie.description : "You should add descriptions in 'Edit' Page." %>
+  </p>
 
-<p>
-  <strong>Release Date:</strong>
-  <%= @movie.release_date %>
-</p>
+  <p class="movie-info">
+    <strong>Release Date:</strong>
+    <%= @movie.release_date.strftime("%Y-%m-%d") %>
+  </p>
 
-<div>
-  <%= link_to "Edit this movie", edit_movie_path(@movie), class: 'btn btn-warning' %> |
-
-  <%= link_to "Back to movies", movies_path, class: 'btn btn-secondary' %> |
-
-  <%= link_to "Destroy this movie", @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <div class="button-group">
+    <%= link_to "Edit this movie", edit_movie_path(@movie), class: 'btn btn-warning' %>
+    <%= link_to "Back to movies", movies_path, class: 'btn btn-secondary' %>
+    <%= link_to "Destroy this movie", @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
 </div>

@@ -1,76 +1,82 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[ show edit update destroy ]
+    before_action :set_movie, only: %i[ show edit update destroy ]
 
-  # GET /movies or /movies.json
-  def index
-    sort = params[:sort] || session[:sort]
-    direction = params[:direction] || session[:direction] || 'asc'
+    # GET /movies or /movies.json
+    def index
+        sortable_columns = %w[title rating release_date]
 
-    @movies = Movie.order("#{sort} #{direction}")
+        sort = params[:sort] || session[:sort] || 'title'
+        direction = params[:direction] || session[:direction] || 'asc'
 
-    session[:sort] = sort
-    session[:direction] = direction
-  end
+        sort = sortable_columns.include?(sort) ? sort : 'title'
+        direction = %w[asc desc].include?(direction) ? direction : (session[:direction] || 'asc')
 
-  # GET /movies/1 or /movies/1.json
-  def show
-  end
+        @movies = Movie.order("#{sort} #{direction}")
 
-  # GET /movies/new
-  def new
-    @movie = Movie.new
-  end
+        session[:sort] = sort
+        session[:direction] = direction
 
-  # GET /movies/1/edit
-  def edit
-  end
-
-  # POST /movies or /movies.json
-  def create
-    @movie = Movie.new(movie_params)
-
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to movie_url(@movie), notice: "Movie was successfully created." }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
     end
-  end
 
-  # PATCH/PUT /movies/1 or /movies/1.json
-  def update
-    respond_to do |format|
-      if @movie.update(movie_params)
-        format.html { redirect_to movie_url(@movie), notice: "Movie was successfully updated." }
-        format.json { render :show, status: :ok, location: @movie }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
+    # GET /movies/1 or /movies/1.json
+    def show
     end
-  end
 
-  # DELETE /movies/1 or /movies/1.json
-  def destroy
-    @movie.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to movies_url, notice: "Movie was successfully destroyed." }
-      format.json { head :no_content }
+    # GET /movies/new
+    def new
+        @movie = Movie.new
     end
-  end
 
-  private
+    # GET /movies/1/edit
+    def edit
+    end
+
+    # POST /movies or /movies.json
+    def create
+        @movie = Movie.new(movie_params)
+
+        respond_to do |format|
+            if @movie.save
+                format.html { redirect_to movies_url(sort: session[:sort], direction: session[:direction]), notice: "Movie was successfully created." }
+                format.json { render :show, status: :created, location: @movie }
+            else
+                format.html { render :new, status: :unprocessable_entity }
+                format.json { render json: @movie.errors, status: :unprocessable_entity }
+            end
+        end
+    end
+
+    # PATCH/PUT /movies/1 or /movies/1.json
+    def update
+        respond_to do |format|
+            if @movie.update(movie_params)
+                format.html { redirect_to movies_url(sort: session[:sort], direction: session[:direction]), notice: "Movie was successfully updated." }
+                format.json { render :show, status: :ok, location: @movie }
+            else
+                format.html { render :edit, status: :unprocessable_entity }
+                format.json { render json: @movie.errors, status: :unprocessable_entity }
+            end
+        end
+    end
+
+    # DELETE /movies/1 or /movies/1.json
+    def destroy
+        @movie.destroy!
+        respond_to do |format|
+            format.html { redirect_to movies_url(sort: session[:sort], direction: session[:direction]), notice: "Movie was successfully destroyed." }
+            format.json { head :no_content }
+        end
+    end
+
+    private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params[:id])
+        @movie = Movie.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.require(:movie).permit(:title, :rating, :description, :release_date)
+        params.require(:movie).permit(:title, :rating, :description, :release_date)
     end
 end

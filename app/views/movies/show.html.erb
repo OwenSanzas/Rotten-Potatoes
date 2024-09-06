@@ -1,10 +1,26 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @movie %>
+<h1><%= @movie.title %></h1>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @movie.rating %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @movie.description %>
+</p>
+
+<p>
+  <strong>Release Date:</strong>
+  <%= @movie.release_date %>
+</p>
 
 <div>
-  <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
-  <%= link_to "Back to movies", movies_path %>
+  <%= link_to "Edit this movie", edit_movie_path(@movie), class: 'btn btn-warning' %> |
 
-  <%= button_to "Destroy this movie", @movie, method: :delete %>
+  <%= link_to "Back to movies", movies_path, class: 'btn btn-secondary' %> |
+
+  <%= link_to "Destroy this movie", @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
 </div>

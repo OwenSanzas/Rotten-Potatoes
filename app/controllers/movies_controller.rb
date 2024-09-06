@@ -35,14 +35,10 @@ class MoviesController < ApplicationController
     def create
         @movie = Movie.new(movie_params)
 
-        respond_to do |format|
-            if @movie.save
-                format.html { redirect_to movies_url(sort: session[:sort], direction: session[:direction]), notice: "Movie was successfully created." }
-                format.json { render :show, status: :created, location: @movie }
-            else
-                format.html { render :new, status: :unprocessable_entity }
-                format.json { render json: @movie.errors, status: :unprocessable_entity }
-            end
+        if @movie.save
+            redirect_to movies_url(sort: session[:sort], direction: session[:direction]), notice: 'Movie was successfully created.'
+        else
+            render :new, status: :unprocessable_entity
         end
     end
 
@@ -61,9 +57,9 @@ class MoviesController < ApplicationController
 
     # DELETE /movies/1 or /movies/1.json
     def destroy
-        @movie.destroy!
+        @movie.destroy
         respond_to do |format|
-            format.html { redirect_to movies_url(sort: session[:sort], direction: session[:direction]), notice: "Movie was successfully destroyed." }
+            format.html { redirect_to movies_url(sort: session[:sort], direction: session[:direction]), notice: 'Movie was successfully destroyed.' }
             format.json { head :no_content }
         end
     end

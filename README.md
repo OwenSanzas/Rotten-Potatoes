@@ -36,29 +36,3 @@ This is a typical example for MVC designed Web App. Here you can see some info a
 |        Sort unchanged after navigation        |   √    |
 | css for all pages |   √    |
 
-
-
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

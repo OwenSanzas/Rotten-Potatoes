@@ -30,7 +30,7 @@ This is a typical example for MVC designed Web App. Here you can see some info a
 |        Read(show)        |   √    |
 |        Update(edit)        |   √    |
 |     Delete      |   √    |
-|        Seeded Database        |   √    |
+|        Seeded Database (added more movies)        |   √    |
 |       Table        |   √    |
 |       Sort       |   √    |
 |        Sort unchanged after navigation        |   √    |
